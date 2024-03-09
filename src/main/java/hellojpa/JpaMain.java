@@ -1,6 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -16,10 +17,10 @@ public class JpaMain {
             // 오류가 발생할 경우를 대비하여 try catch를 사용
 
             // 회원 등록
-//            Member member = new Member();
-//            member.setId(1L);
-//            member.setName("HelloA");
-//            em.persist(member);
+//            Member member3 = new Member();
+//            member3.setId(4L);
+//            member3.setName("Hello4");
+//            em.persist(member3);
 
             // 회원 조회
 //            Member findMember = em.find(Member.class, 1L);
@@ -31,8 +32,18 @@ public class JpaMain {
 //            em.remove(findMember);
 
             // 회원 수정
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+//            Member findMember = em.find(Member.class, 1L);
+//            findMember.setName("HelloJPA");
+
+            // JPQL을 이용한 회원 조회
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                    .setFirstResult(1) // 페이지네이션 가져올 첫번째 인덱스 // 주의) 인덱스는 0부터 시작이다.
+//                    .setMaxResults(2) // 페이지니에션 가져오는 개수 // 1번 인덱스부터 2개 가져와
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member.name = " + member.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
