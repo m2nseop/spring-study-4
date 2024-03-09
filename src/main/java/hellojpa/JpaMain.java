@@ -30,6 +30,10 @@ public class JpaMain {
 //            Member findMember = em.find(Member.class, 1L);
 //            em.remove(findMember);
 
+            // 회원 수정
+            Member findMember = em.find(Member.class, 1L);
+            findMember.setName("HelloJPA");
+
             tx.commit();
         } catch (Exception e) {
             // 문제가 생길경우 작업한 내용 롤백(초기화)
