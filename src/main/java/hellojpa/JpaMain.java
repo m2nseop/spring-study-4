@@ -19,14 +19,16 @@ public class JpaMain {
 //            Member member = new Member();
 //            member.setId(1L);
 //            member.setName("HelloA");
-
 //            em.persist(member);
 
             // 회원 조회
-            Member findMember = em.find(Member.class, 1L);
-            System.out.println("findMember.id = " + findMember.getId());
-            System.out.println("findMember.name = " + findMember.getName());
+//            Member findMember = em.find(Member.class, 1L);
+//            System.out.println("findMember.id = " + findMember.getId());
+//            System.out.println("findMember.name = " + findMember.getName());
 
+            // 회원 삭제
+//            Member findMember = em.find(Member.class, 1L);
+//            em.remove(findMember);
 
             tx.commit();
         } catch (Exception e) {
