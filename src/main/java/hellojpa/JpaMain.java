@@ -16,11 +16,17 @@ public class JpaMain {
             // 오류가 발생할 경우를 대비하여 try catch를 사용
 
             // 회원 등록
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("HelloA");
+//            Member member = new Member();
+//            member.setId(1L);
+//            member.setName("HelloA");
 
-            em.persist(member);
+//            em.persist(member);
+
+            // 회원 조회
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println("findMember.id = " + findMember.getId());
+            System.out.println("findMember.name = " + findMember.getName());
+
 
             tx.commit();
         } catch (Exception e) {
