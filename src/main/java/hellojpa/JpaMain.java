@@ -64,9 +64,17 @@ public class JpaMain {
 //            System.out.println("=== After ===");
             // Before와 After사이에 쿼리가 날라갈 것 같지만 그렇지 않다. // tx.commit() 시점에 쿼리가 날라간다.
 
-            Member findMember1 = em.find(Member.class, 101L); // 어플리케이션을 다시 시작했을 경우 디비에는 존재하지만 1차캐쉬에 존재하지 않기 때문에 쿼리가 실행된다.
-            Member findMember2 = em.find(Member.class, 101L); // 위 코드에서 조회를 하는 과정에서 1차 캐쉬에 엔티티를 저장했기 때문에 쿼리가 실행되지 않는다.
+//            Member findMember1 = em.find(Member.class, 101L); // 어플리케이션을 다시 시작했을 경우 디비에는 존재하지만 1차캐쉬에 존재하지 않기 때문에 쿼리가 실행된다.
+//            Member findMember2 = em.find(Member.class, 101L); // 위 코드에서 조회를 하는 과정에서 1차 캐쉬에 엔티티를 저장했기 때문에 쿼리가 실행되지 않는다.
 
+
+            // 트랜잭션을 지원하는 쓰기 지원
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+            em.persist(member1);
+            em.persist(member2);
+
+            System.out.println("============"); // 쓰기 지연 때문에 트랜잭션이 커밋되지 않은 이 시점 이후에 쿼리가 실행될 것
 
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
