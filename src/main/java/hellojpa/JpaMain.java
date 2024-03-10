@@ -44,14 +44,29 @@ public class JpaMain {
 //            findMember.setName("HelloJPA");
 
             // JPQL을 이용한 회원 조회
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-//                    .setFirstResult(1) // 페이지네이션 가져올 첫번째 인덱스 // 주의) 인덱스는 0부터 시작이다.
-//                    .setMaxResults(2) // 페이지니에션 가져오는 개수 // 1번 인덱스부터 2개 가져와
-                    .getResultList();
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+////                    .setFirstResult(1) // 페이지네이션 가져올 첫번째 인덱스 // 주의) 인덱스는 0부터 시작이다.
+////                    .setMaxResults(2) // 페이지니에션 가져오는 개수 // 1번 인덱스부터 2개 가져와
+//                    .getResultList();
+//
+//            for (Member member : result) {
+//                System.out.println("member.name = " + member.getName());
+//            }
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            // 비영속
+//            Member member = new Member();
+//            member.setId(101L);
+//            member.setName("HelloJPA");
+
+            // 영속
+//            System.out.println("=== Before ===");
+//            em.persist(member);
+//            System.out.println("=== After ===");
+            // Before와 After사이에 쿼리가 날라갈 것 같지만 그렇지 않다. // tx.commit() 시점에 쿼리가 날라간다.
+
+            Member findMember1 = em.find(Member.class, 101L); // 어플리케이션을 다시 시작했을 경우 디비에는 존재하지만 1차캐쉬에 존재하지 않기 때문에 쿼리가 실행된다.
+            Member findMember2 = em.find(Member.class, 101L); // 위 코드에서 조회를 하는 과정에서 1차 캐쉬에 엔티티를 저장했기 때문에 쿼리가 실행되지 않는다.
+
 
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
