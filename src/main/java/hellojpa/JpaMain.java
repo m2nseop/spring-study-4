@@ -81,6 +81,13 @@ public class JpaMain {
 //            Member member = em.find(Member.class, 150L);
 //            member.setName("ABC");
 
+            Member member = new Member();
+            member.setId(3L);
+            member.setUsername("C");
+            member.setRoleType(RoleType.ADMIN);
+
+            em.persist(member);
+
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
         } catch (Exception e) {
