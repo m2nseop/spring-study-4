@@ -69,12 +69,17 @@ public class JpaMain {
 
 
             // 트랜잭션을 지원하는 쓰기 지원
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
-            em.persist(member1);
-            em.persist(member2);
+//            Member member1 = new Member(150L, "A");
+//            Member member2 = new Member(160L, "B");
+//            em.persist(member1);
+//            em.persist(member2);
+//
+//            System.out.println("============"); // 쓰기 지연 때문에 트랜잭션이 커밋되지 않은 이 시점 이후에 쿼리가 실행될 것
 
-            System.out.println("============"); // 쓰기 지연 때문에 트랜잭션이 커밋되지 않은 이 시점 이후에 쿼리가 실행될 것
+            // 변경 감지(Dirty Checking)
+//            Member member1 = new Member(150L, "A"); // 했다고 가정
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("ABC");
 
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
