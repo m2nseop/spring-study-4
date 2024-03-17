@@ -81,12 +81,40 @@ public class JpaMain {
 //            Member member = em.find(Member.class, 150L);
 //            member.setName("ABC");
 
-            Member member = new Member();
-            member.setId(3L);
-            member.setUsername("C");
-            member.setRoleType(RoleType.ADMIN);
+//            Member member = new Member();
+//            member.setId(3L);
+//            member.setUsername("C");
+//            member.setRoleType(RoleType.ADMIN);
 
-            em.persist(member);
+            // 기본 키 매핑 예제
+//            Member member = new Member();
+//            member.setUsername("C");
+//
+//            System.out.println("==========");
+//            em.persist(member);
+//            System.out.println("member.id = " + member.getId());
+//            System.out.println("==========");
+
+            Member member1 = new Member();
+            member1.setUsername("A");
+
+            Member member2 = new Member();
+            member2.setUsername("B");
+
+            Member member3 = new Member();
+            member3.setUsername("C");
+
+            System.out.println("==========");
+
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
+
+            System.out.println("member1.id = " + member1.getId());
+            System.out.println("member2.id = " + member2.getId());
+            System.out.println("member3.id = " + member3.getId());
+
+            System.out.println("==========");
 
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
