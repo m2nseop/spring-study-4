@@ -95,27 +95,73 @@ public class JpaMain {
 //            System.out.println("member.id = " + member.getId());
 //            System.out.println("==========");
 
-            Member member1 = new Member();
-            member1.setUsername("A");
+//            Member member1 = new Member();
+//            member1.setUsername("A");
+//
+//            Member member2 = new Member();
+//            member2.setUsername("B");
+//
+//            Member member3 = new Member();
+//            member3.setUsername("C");
+//
+//            System.out.println("==========");
+//
+//            em.persist(member1);
+//            em.persist(member2);
+//            em.persist(member3);
+//
+//            System.out.println("member1.id = " + member1.getId());
+//            System.out.println("member2.id = " + member2.getId());
+//            System.out.println("member3.id = " + member3.getId());
+//
+//            System.out.println("==========");
 
-            Member member2 = new Member();
-            member2.setUsername("B");
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            team.getMembers().add(member);
+//
+//            em.flush(); // 위의 쿼리들을 날려주고
+//            em.clear(); // 영속성 컨텍스트를 한번 비워준다.
+//
+//            Team findTeam = em.find(Team.class, team.getId());
+//            List<Member> members = findTeam.getMembers();
+//
+//            System.out.println("============");
+//            for (Member m : members) {
+//                System.out.println("m.getUsername() = " + m.getUsername());
+//            }
+//            System.out.println("============");
 
-            Member member3 = new Member();
-            member3.setUsername("C");
+//            Member member = new Member();
+//            member.setUsername("member1");
+//
+//            em.persist(member);
+//
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            team.getMembers().add(member);
 
-            System.out.println("==========");
+//            em.persist(team);
 
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(member3);
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbbb");
+            movie.setName("바람과함계사라지다.");
+            movie.setPrice(10000);
+            em.persist(movie);
 
-            System.out.println("member1.id = " + member1.getId());
-            System.out.println("member2.id = " + member2.getId());
-            System.out.println("member3.id = " + member3.getId());
+            em.flush();
+            em.clear();
 
-            System.out.println("==========");
-
+            Movie findMovie = em.find(Movie.class, movie.getId()); // 생성된 쿼리를 보면 ㅓoin을 해서 가져오는 것을 알 수 있다.
+            System.out.println("findMovie = " + findMovie);
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
         } catch (Exception e) {
