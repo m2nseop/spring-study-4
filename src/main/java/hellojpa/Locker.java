@@ -14,6 +14,6 @@ public class Locker {
     private String name;
 
     // 양방향을 원한다면?
-    @OneToOne(mappedBy = "locker")
-    private Member member;
+//    @OneToOne(mappedBy = "locker")
+//    private Member member;
 }

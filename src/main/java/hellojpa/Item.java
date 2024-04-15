@@ -8,7 +8,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn // Dtype을 만들어주는 어노테이션 / 구현체의 엔티티 이름이 들어감 -> 가독성이 좋아짐 // 엔티티 이름은 해당 엔티티에서 @DiscriminatorValue로 변경 가능
 public class Item {
     @Id @GeneratedValue

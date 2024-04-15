@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.locks.Lock;
 
@@ -26,7 +27,7 @@ import java.util.concurrent.locks.Lock;
 //        sequenceName = "MEMBER_SEQ",
 //        initialValue = 1,
 //        allocationSize = 50)
-public class Member {
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -38,13 +39,16 @@ public class Member {
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
-//    @ManyToOne // @현재(주인)엔티티To필드엔티티 , Member(Many) To Team(One), 하나의 팀에는 여러명의 멤버가 있을 수 있지만, 하나의 멤버는 하나의 팀에만 소속되어야 한다.
-//    @JoinColumn(name = "TEAM_ID")
-//    private Team team;
+    @ManyToOne // @현재(주인)엔티티To필드엔티티 , Member(Many) To Team(One), 하나의 팀에는 여러명의 멤버가 있을 수 있지만, 하나의 멤버는 하나의 팀에만 소속되어야 한다.
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID") // 외래키, 외래키가 존재하는 엔티티가 연관관계 주인
-    private Locker locker;
+
+    private String createdBy;
+    private LocalDateTime createdDate;
+    private String lastModifiedBy;
+    private LocalDateTime lastModifiedDate;
+
 
     public Long getId() {
         return id;
@@ -62,7 +66,55 @@ public class Member {
         this.username = username;
     }
 
-//    public Team getTeam() {
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Override
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    @Override
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @Override
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    @Override
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    @Override
+    public LocalDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    @Override
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    //    public Team getTeam() {
 //        return team;
 //    }
 //

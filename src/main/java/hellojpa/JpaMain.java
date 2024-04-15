@@ -1,7 +1,9 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
+import javax.lang.model.SourceVersion;
 
 public class JpaMain {
 
@@ -150,18 +152,54 @@ public class JpaMain {
 
 //            em.persist(team);
 
-            Movie movie = new Movie();
-            movie.setDirector("aaaa");
-            movie.setActor("bbbb");
-            movie.setName("바람과함계사라지다.");
-            movie.setPrice(10000);
-            em.persist(movie);
+//            Movie movie = new Movie();
+//            movie.setDirector("aaaa");
+//            movie.setActor("bbbb");
+//            movie.setName("바람과함계사라지다.");
+//            movie.setPrice(10000);
+//            em.persist(movie);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Movie findMovie = em.find(Movie.class, movie.getId()); // 생성된 쿼리를 보면 ㅓoin을 해서 가져오는 것을 알 수 있다.
+//            System.out.println("findMovie = " + findMovie);
+
+//            Member member = new Member();
+//            member.setUsername("user1");
+//            member.setCreatedBy("kim");
+//            member.setCreatedDate(LocalDateTime.now());
+//
+//            em.persist(member);
+
+//            em.flush();
+//            em.clear();
+
+            Member member = new Member();
+            member.setUsername("member1");
+
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId()); // 생성된 쿼리를 보면 ㅓoin을 해서 가져오는 것을 알 수 있다.
-            System.out.println("findMovie = " + findMovie);
+//            // find
+////            Member findMember = em.find(Member.class, member.getId()); // select 쿼리가 나간다.
+//
+//            // getReference
+//            Member findMember = em.getReference(Member.class, member.getId()); // select 쿼리가 나가지 않는다.
+//            System.out.println("findMember.id = " + findMember.getId()); // 이때도 select 쿼리가 나가지 않는다. // member.getId()로 부터 이미 member의 id를 알고 있기 때문에 디비에 접근할 필요가 없기 때문이다.
+//            System.out.println("findMember.username = " + findMember.getUsername()); // 이때부터는 디비에 접근해야만 알 수 있는 정보이기 때문에 이제서야 쿼리가 날라간다.
+//            System.out.println("findMember.username = " + findMember.getUsername()); // 이때부터는 디비에 접근해야만 알 수 있는 정보이기 때문에 이제서야 쿼리가 날라간다.
+
+            Member m1 = em.find(Member.class, member.getId());
+            System.out.println("m1 = " + m1.getClass());
+
+            Member reference = em.getReference(Member.class, member.getId());
+            System.out.println("reference = " + reference.getClass());
+
+            System.out.println(m1.getClass() == reference.getClass());
+
             tx.commit();
             // commit을 해야 변경사항이 db에 반영이 된다.
         } catch (Exception e) {
